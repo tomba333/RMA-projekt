@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/homeFragment4">
+
+    <action android:id="@+id/action_global_trackingFragment"
+        app:destination="@+id/trackingFragment"
+        app:launchSingleTop="true"/>
+    <fragment
+        android:id="@+id/homeFragment4"
+        android:name="com.example.bike_app.ui.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_ui">
+        <action
+            android:id="@+id/action_homeFragment4_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rideListFragment"
+        android:name="com.example.bike_app.ui.RideListFragment"
+        android:label="RideListFragment"
+        tools:layout="@layout/fragment_ride_list">
+        <action
+            android:id="@+id/action_rideListFragment_to_homeFragment4"
+            app:destination="@id/homeFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.example.bike_app.ui.TrackingFragment"
+        android:label="TrackingFragment"
+        tools:layout="@layout/tracking">
+        <action
+            android:id="@+id/action_trackingFragment_to_homeFragment4"
+            app:destination="@id/homeFragment4" />
+    </fragment>
+</navigation>

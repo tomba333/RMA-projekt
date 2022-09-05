@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Bike_app</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD7ZoSDZ5drHQwgk7T6ivOxOZV0wkdf8Og</string>
+    <string name="saved_user_weight"></string>
+</resources>
