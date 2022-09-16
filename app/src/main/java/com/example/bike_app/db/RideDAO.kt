@@ -12,7 +12,7 @@ interface RideDAO {
     @Delete
     fun deleteRide(ride: Ride)
 
-    @Query("SELECT * FROM riding_table Order BY time DESC")
+    @Query("SELECT * FROM riding_table Order BY date DESC")
     fun getAllRidesSortedByDate(): LiveData<List<Ride>>
 
 

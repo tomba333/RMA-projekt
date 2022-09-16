@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment4_to_trackingFragment"
             app:destination="@id/trackingFragment" />
+        <action
+            android:id="@+id/action_homeFragment4_to_walkTrackingFragment"
+            app:destination="@id/walkTrackingFragment" />
     </fragment>
     <fragment
         android:id="@+id/rideListFragment"
@@ -33,6 +36,20 @@
         tools:layout="@layout/tracking">
         <action
             android:id="@+id/action_trackingFragment_to_homeFragment4"
+            app:destination="@id/homeFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/walkListFragment2"
+        android:name="com.example.bike_app.ui.WalkListFragment"
+        android:label="WalkListFragment"
+        tools:layout="@layout/fragment_walk_list"/>
+    <fragment
+        android:id="@+id/walkTrackingFragment"
+        android:name="com.example.bike_app.ui.WalkTrackingFragment"
+        android:label="WalkTrackingFragment"
+        tools:layout="@layout/fragment_walk_tracking">
+        <action
+            android:id="@+id/action_walkTrackingFragment_to_homeFragment4"
             app:destination="@id/homeFragment4" />
     </fragment>
 </navigation>

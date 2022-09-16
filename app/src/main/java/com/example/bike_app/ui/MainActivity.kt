@@ -17,6 +17,7 @@ import com.example.bike_app.di.repositoryModule
 import com.example.bike_app.di.serviceModule
 import com.example.bike_app.di.viewmodelModule
 import com.example.bike_app.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
+import com.example.bike_app.services.TrackingService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -35,14 +36,13 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         setContentView(binding.root)
 
         navigateToTrackingFragmentifNeeded(intent)
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         findViewById<BottomNavigationView>(R.id.bottom_navigationView)
             .setupWithNavController(navController)
         navController.addOnDestinationChangedListener{_,destination,_->
             when(destination.id){
-                R.id.rideListFragment, R.id.homeFragment4 ->binding.bottomNavigationView.visibility = View.VISIBLE
+                R.id.rideListFragment, R.id.homeFragment4, R.id.walkListFragment2 ->binding.bottomNavigationView.visibility = View.VISIBLE
                 else-> binding.bottomNavigationView.visibility=View.GONE
         }
     }

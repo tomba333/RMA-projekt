@@ -68,7 +68,6 @@ class TrackingFragment: Fragment() {
             map = it
             addAllPolylines()
         }
-        Log.e("###############", weight.toString())
         binding.btnFinish.setOnClickListener {
             zoomToSeeWholeTrack()
             endRideAndSaveToDb()
@@ -199,7 +198,7 @@ class TrackingFragment: Fragment() {
 
     override fun onStop() {
         super.onStop()
-        binding.mapView?.onStart()
+        binding.mapView?.onStop()
     }
 
     override fun onPause() {

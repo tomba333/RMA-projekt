@@ -5,17 +5,23 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_LOW
+import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.hardware.*
 import android.location.Location
 import android.os.Build
 import android.os.Looper
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.bike_app.other.Constants.ACTION_PAUSE_SERVICE
 import com.example.bike_app.other.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.bike_app.other.Constants.ACTION_START_STICKY
 import com.example.bike_app.other.Constants.ACTION_STOP_SERVICE
 import com.example.bike_app.other.Constants.FASTEST_LOCATION_INTERVAL
 import com.example.bike_app.other.Constants.LOCATION_UPDATE_INTERVAL
@@ -43,18 +49,22 @@ import timber.log.Timber
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
 
-class TrackingService: LifecycleService(), KoinScopeComponent {
+class TrackingService: LifecycleService(), KoinScopeComponent, SensorEventListener{
 
     var isFirstRun = true
     var serviceKilled = false
     override val scope: Scope by serviceScope()
-
 
     val fusedLocationProviderClient: FusedLocationProviderClient by inject()
     val baseNotificationBuilder: NotificationCompat.Builder by inject()
 
     lateinit var curNotificationBuilder: NotificationCompat.Builder
     private val timeRunInSecunds = MutableLiveData<Long>()
+
+
+    //private lateinit var sensorManager:SensorManager
+    //private var pedometar : Sensor? = null
+
     companion object{
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<Polylines>()
@@ -66,10 +76,23 @@ class TrackingService: LifecycleService(), KoinScopeComponent {
         postInitialValues()
         curNotificationBuilder = baseNotificationBuilder
         fusedLocationProviderClient
+        //sensorManager = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        //pedometar = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
         isTracking.observe(this, Observer{
             upadateLocationTracking(it)
         })
+
     }
+   /* private fun pauseStepCounter(){
+        sensorManager.unregisterListener(this)
+    }
+    private fun startStepCounter(){
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null)
+        {
+            pedometar = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
+            sensorManager.registerListener(this,pedometar, SensorManager.SENSOR_DELAY_UI)
+        }
+    }*/
     private fun postInitialValues(){
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
@@ -90,6 +113,7 @@ class TrackingService: LifecycleService(), KoinScopeComponent {
                 ACTION_PAUSE_SERVICE -> {
                     Timber.d("Pause service")
                     pauseService()
+
                 }
                 ACTION_STOP_SERVICE -> {
                     Timber.d("Stop service")
@@ -99,6 +123,7 @@ class TrackingService: LifecycleService(), KoinScopeComponent {
         }
         return super.onStartCommand(intent, flags, startId)
     }
+
 
     private fun stopService(){
             serviceKilled = true
@@ -226,5 +251,14 @@ class TrackingService: LifecycleService(), KoinScopeComponent {
         )
         notificationManager.createNotificationChannel(channel)
     }
+
+    override fun onSensorChanged(p0: SensorEvent?) {
+
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+
+    }
+
 
 }

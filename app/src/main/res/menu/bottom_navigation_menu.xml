@@ -5,6 +5,10 @@
         android:title="Rides"
         android:icon="@drawable/icons_bicycle_24"
         />
+    <item android:id="@+id/walkListFragment2"
+        android:title="Walks"
+        android:icon="@drawable/icons_walking_30"
+        />
     <item android:id="@+id/homeFragment4"
         android:title="Home"
         android:icon="@drawable/icons_home_24"

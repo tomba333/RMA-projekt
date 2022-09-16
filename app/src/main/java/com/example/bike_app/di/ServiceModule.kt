@@ -31,9 +31,8 @@ val serviceModule = module{
     fun provideBaseNotificationBuilder(application: Context,
                                        pendingIntent: PendingIntent)=
         NotificationCompat.Builder(application, Constants.NOTIFICATION_CH_ID)
-            .setAutoCancel(false)
             .setOngoing(true)
-            .setSmallIcon(R.drawable.icons_bicycle_24)
+            .setSmallIcon(R.drawable.icons_walking_30)
             .setContentTitle("Bike App")
             .setContentText("")
             .setAutoCancel(true)

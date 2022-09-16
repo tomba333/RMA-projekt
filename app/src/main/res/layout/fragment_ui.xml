@@ -11,7 +11,7 @@
         android:id="@+id/tvWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weight:"
+        android:text="Body mass:"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,11 +58,23 @@
         android:layout_marginBottom="80dp"
        />
 
+    <ImageButton
+        android:id="@+id/btn_walk"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icons_walking_60"
+        android:background="@drawable/rounded_corner"
+        app:layout_constraintBottom_toTopOf="@id/btn_bike"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="80dp"
+        />
+
     <TextView
         android:id="@+id/Weight_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your current weight is:"
+        android:text="Your current body mass is:"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/bnt_save"
         app:layout_constraintStart_toStartOf="parent"

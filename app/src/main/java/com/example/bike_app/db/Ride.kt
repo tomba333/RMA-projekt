@@ -11,7 +11,7 @@ data class Ride
     @ColumnInfo(name = "mapa")
     var img: Bitmap? = null,
     @ColumnInfo(name = "date")
-    var timestamp: Long = 0L, //za sortiranje; jer je lakse sortirati long nego Datetime
+    var timestamp: Long = 0L,
     @ColumnInfo(name = "speed")
     var avgSpeed: Float = 0f,
     @ColumnInfo(name = "distance")

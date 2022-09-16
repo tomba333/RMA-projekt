@@ -11,6 +11,7 @@ import android.view.SurfaceControl
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.bike_app.R
@@ -27,6 +28,7 @@ import pub.devrel.easypermissions.EasyPermissions
 class HomeFragment: Fragment(), EasyPermissions.PermissionCallbacks {
 
     lateinit var binding: FragmentUiBinding
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,11 +42,16 @@ class HomeFragment: Fragment(), EasyPermissions.PermissionCallbacks {
         binding.bntSave.setOnClickListener { save()
             loadData()
         }
+        binding.btnWalk.setOnClickListener {
+            findNavController().navigate(R.id.walkTrackingFragment)
+
+        }
         binding.btnBike.setOnClickListener {
             findNavController().navigate(R.id.trackingFragment)
         }
         return binding.root
     }
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun requestPermission(){
         if(TrackingUtility.hasLocationPermission(requireContext())){
             return
@@ -55,7 +62,8 @@ class HomeFragment: Fragment(), EasyPermissions.PermissionCallbacks {
                     "You need to accs location permission to use this app",
                     REQUEST_CODE_LOCATION_PERMISSION,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACTIVITY_RECOGNITION
                 )
             }else{
                 EasyPermissions.requestPermissions(
@@ -97,6 +105,7 @@ class HomeFragment: Fragment(), EasyPermissions.PermissionCallbacks {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this,perms)){
             AppSettingsDialog.Builder(this).build().show()
